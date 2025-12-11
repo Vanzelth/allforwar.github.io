@@ -1,56 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Calculadora PEL</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #1a1a1a;
-            color: #fff;
-            padding: 20px;
-        }
-        h1 { text-align: center; }
-        .box {
-            background: #2b2b2b;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 500px;
-            margin: auto;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 5px;
-            border: none;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #4CAF50;
-            border: none;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        button:hover { background: #45a049; }
-        #resultado {
-            margin-top: 20px;
-            font-size: 20px;
-            text-align: center;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+<meta charset="utf-8" />
+<title>Calculadora PEL</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body {
+        background: #0f1114;
+        color: #e6eef6;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .container {
+        width: 100%;
+        max-width: 750px;
+        background: #16181b;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0,0,0,0.45);
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    label {
+        font-size: 14px;
+        margin-bottom: 6px;
+        display: block;
+        color: #bfc5cc;
+    }
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 14px;
+        border-radius: 6px;
+        border: 1px solid #333;
+        background: #0f1114;
+        color: #fff;
+        font-size: 15px;
+    }
+    button {
+        width: 100%;
+        padding: 14px;
+        background: #4caf50;
+        border: none;
+        color: #06120a;
+        font-size: 17px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    button:hover {
+        background: #3d8f41;
+    }
+    #resultado {
+        margin-top: 18px;
+        background: #1c1f25;
+        padding: 16px;
+        border-radius: 8px;
+        font-size: 20px;
+        text-align: center;
+    }
+</style>
 </head>
 <body>
 
-<h1>Calculadora PEL</h1>
+<div class="container">
+    <h1>Calculadora PEL</h1>
 
-<div class="box">
     <label>Puntos de Rango</label>
     <input type="number" id="puntosRango">
 
@@ -60,35 +79,57 @@
     <label>BP</label>
     <input type="number" id="bp">
 
-    <!-- Variables internas B, C, D, E -->
-    <input type="number" id="B" class="hidden" value="1">
-    <input type="number" id="C" class="hidden" value="1">
-    <input type="number" id="D" class="hidden" value="1">
-    <input type="number" id="E" class="hidden" value="1">
+    <label>Nivel</label>
+    <input type="number" id="nivel">
+
+    <label>Liga</label>
+    <input type="number" id="liga">
+
+    <label>Fisura</label>
+    <input type="number" id="fisura">
+
+    <label>Ptos Batalla Rango</label>
+    <input type="number" id="pbRango">
+
+    <label>Modificador de botín de disminuciones (ej: 0.05 = 5%)</label>
+    <input type="number" step="any" id="modBotin">
+
+    <label>Cicatriz de Bot</label>
+    <input type="number" id="cicatriz">
+
+    <label>Racha de inicios de sesión</label>
+    <input type="number" id="racha">
 
     <button onclick="calcularPEL()">Calcular PEL</button>
 
-    <div id="resultado"></div>
+    <div id="resultado">PEL: —</div>
 </div>
 
 <script>
 function calcularPEL() {
-    // Variables visibles
-    let puntosRango = parseFloat(document.getElementById("puntosRango").value || 0);
-    let exp = parseFloat(document.getElementById("exp").value || 0);
-    let bp = parseFloat(document.getElementById("bp").value || 0);
+    // Obtener valores
+    let puntosRango = parseFloat(document.getElementById("puntosRango").value) || 0;
+    let exp = parseFloat(document.getElementById("exp").value) || 0;
+    let bp = parseFloat(document.getElementById("bp").value) || 0;
+    let nivel = parseFloat(document.getElementById("nivel").value) || 0;
+    let liga = parseFloat(document.getElementById("liga").value) || 0;
+    let fisura = parseFloat(document.getElementById("fisura").value) || 0;
+    let pbRango = parseFloat(document.getElementById("pbRango").value) || 0;
+    let modBotin = parseFloat(document.getElementById("modBotin").value) || 0;
+    let cicatriz = parseFloat(document.getElementById("cicatriz").value) || 0;
+    let racha = parseFloat(document.getElementById("racha").value) || 1;
 
-    // Variables internas
-    let B = parseFloat(document.getElementById("B").value);
-    let C = parseFloat(document.getElementById("C").value);
-    let D = parseFloat(document.getElementById("D").value);
-    let E = parseFloat(document.getElementById("E").value);
+    // Fórmulas internas EXACTAS
+    let B = (nivel + liga + fisura) + (pbRango / 5);
+    let C = 3 - modBotin;
+    let D = 1 - (0.05 * cicatriz);
+    let E = racha / 10;
 
-    // Calculo de A
+    // A
     let A = puntosRango / (B * C * D * E);
 
-    // Formula final
-    let PEL = (((A * 2) - (bp / 30)) * 100000) - exp;
+    // PEL final
+    let PEL = ((((A * 2) - (bp / 30)) * 100000) - exp);
 
     document.getElementById("resultado").innerHTML =
         "PEL: " + PEL.toLocaleString("es-CL");
