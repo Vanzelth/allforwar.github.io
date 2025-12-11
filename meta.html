@@ -1,117 +1,125 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Calculadora EXP Modificado</title>
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora EXP Modificado</title>
+  <style>
     body {
-        background-color: #0a0a0a;
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        padding: 20px;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      font-family: Consolas, monospace;
+      padding: 20px;
+    }
+    h1 {
+      color: #58a6ff;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #161b22;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000;
     }
     label {
-        display: block;
-        margin: 10px 0 4px;
+      display: block;
+      margin-top: 10px;
     }
     input {
-        width: 220px;
-        padding: 6px;
-        background: #111;
-        border: 1px solid #333;
-        color: white;
+      width: 100%;
+      padding: 6px;
+      background: #0d1117;
+      color: #fff;
+      border: 1px solid #30363d;
+      border-radius: 4px;
+      font-size: 14px;
     }
     button {
-        margin-top: 20px;
-        padding: 10px 20px;
-        background: #222;
-        color: white;
-        border: 1px solid #444;
-        cursor: pointer;
+      width: 100%;
+      margin-top: 15px;
+      background-color: #238636;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #2ea043;
     }
     .resultado {
-        margin-top: 25px;
-        font-size: 20px;
-        padding: 15px;
-        background: #111;
-        border: 1px solid #333;
-        width: 460px;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 22px;
+      color: #f0f6fc;
     }
-</style>
+  </style>
 </head>
 <body>
+  <h1>⚔️ Calculadora EXP Modificado</h1>
+  <div class="container">
 
-<h1>Calculadora EXP Modificado</h1>
+    <label>Meta:</label><input id="meta" type="number" value="0" />
 
-<label>Meta:</label>
-<input id="meta" type="number">
+    <label>ELP:</label><input id="elp" type="number" value="0" />
 
-<label>ELP:</label>
-<input id="elp" type="number">
+    <label>BP:</label><input id="bp" type="number" value="0" />
 
-<label>BP:</label>
-<input id="bp" type="number">
+    <label>Nivel:</label><input id="nivel" type="number" value="0" />
 
-<label>Nivel:</label>
-<input id="nivel" type="number">
+    <label>Liga:</label><input id="liga" type="number" value="0" />
 
-<label>Liga:</label>
-<input id="liga" type="number">
+    <label>Fisura:</label><input id="fisura" type="number" value="0" />
 
-<label>Fisura:</label>
-<input id="fisura" type="number">
+    <label>Puntos de Batalla Rango:</label><input id="pbRango" type="number" value="0" />
 
-<label>Puntos Batalla Rango:</label>
-<input id="pbRango" type="number">
+    <label>Modificador de Botín (disminuciones):</label>
+    <input id="modBotin" type="number" value="0" step="0.1" />
 
-<label>Modificador de Botín (disminuciones):</label>
-<input id="modBotin" type="number">
+    <label>Cicatriz de Bot:</label>
+    <input id="cicatriz" type="number" value="0" step="0.1" />
 
-<label>Cicatriz de Bot:</label>
-<input id="cicatriz" type="number">
+    <label>Racha de inicios de sesión:</label>
+    <input id="racha" type="number" value="0" />
 
-<label>Racha inicio de sesión:</label>
-<input id="racha" type="number">
+    <button onclick="calcularEXP()">Calcular EXP Modificado</button>
 
-<button onclick="calcular()">Calcular EXP Modificado</button>
+    <div class="resultado" id="resultado">El resultado aparecerá aquí</div>
+  </div>
 
-<div class="resultado" id="resultado">Esperando valores…</div>
+  <script>
+    function calcularEXP() {
+      // Entradas
+      const meta = parseFloat(document.getElementById('meta').value) || 0;
+      const elp = parseFloat(document.getElementById('elp').value) || 0;
+      const bp = parseFloat(document.getElementById('bp').value) || 0;
+      const nivel = parseFloat(document.getElementById('nivel').value) || 0;
+      const liga = parseFloat(document.getElementById('liga').value) || 0;
+      const fisura = parseFloat(document.getElementById('fisura').value) || 0;
+      const pbRango = parseFloat(document.getElementById('pbRango').value) || 0;
+      const modBotin = parseFloat(document.getElementById('modBotin').value) || 0;
+      const cicatriz = parseFloat(document.getElementById('cicatriz').value) || 0;
+      const racha = parseFloat(document.getElementById('racha').value) || 0;
 
-<script>
-function calcular() {
+      // Cálculos ocultos
+      const A = (((meta + elp) / 100000) + (bp / 30)) / 2;
+      const B = (nivel + liga + fisura) + (pbRango / 5);
+      const C = 3 - modBotin;
+      const D = 1 - (0.05 * cicatriz);
+      const E = racha / 10;
 
-    const meta = parseFloat(document.getElementById("meta").value);
-    const elp = parseFloat(document.getElementById("elp").value);
-    const bp = parseFloat(document.getElementById("bp").value);
+      // A final (tu fórmula base)
+      const Afinal = A * B * C * D * E;
 
-    const nivel = parseFloat(document.getElementById("nivel").value);
-    const liga = parseFloat(document.getElementById("liga").value);
-    const fisura = parseFloat(document.getElementById("fisura").value);
-    const pbRango = parseFloat(document.getElementById("pbRango").value);
-    const modBotin = parseFloat(document.getElementById("modBotin").value);
-    const cicatriz = parseFloat(document.getElementById("cicatriz").value);
-    const racha = parseFloat(document.getElementById("racha").value);
+      // Fórmula final solicitada
+      const EXP = (((Afinal * 2) - (bp / 30)) * 100000) - elp;
 
-    // --- Cálculo de A B C D E (normales) ---
-
-    const A = ((1 + elp) / 100000) + (bp / 30);  // se ignora EXP porque queremos EXP inverso
-    const B = nivel + liga + fisura + pbRango;
-    const C = 3 - modBotin;
-    const D = 1 - (0.05 * cicatriz);
-    const E = racha / 10;
-
-    // Meta debería ser = A * B * C * D * E
-
-    // --- EXP Inverso según tu Excel ---
-    const EXP = (((A * 2) - (bp / 30)) * 100000) - elp;
-
-    const metaCalculada = A * B * C * D * E;
-
-    document.getElementById("resultado").innerHTML =
-        "<b>EXP Modificado Necesario:</b> " + Math.floor(EXP) +
-        "<br><br><b>Meta generada por tus variables:</b> " + Math.floor(metaCalculada);
-}
-</script>
-
+      document.getElementById('resultado').textContent =
+        "EXP necesario: " + Math.round(EXP).toLocaleString();
+    }
+  </script>
 </body>
 </html>
