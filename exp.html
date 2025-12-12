@@ -1,125 +1,91 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculadora EXP Modificado</title>
-  <style>
-    body {
-      background-color: #0d1117;
-      color: #c9d1d9;
-      font-family: Consolas, monospace;
-      padding: 20px;
-    }
-    h1 {
-      color: #58a6ff;
-      text-align: center;
-    }
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: #161b22;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #000;
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-    }
-    input {
-      width: 100%;
-      padding: 6px;
-      background: #0d1117;
-      color: #fff;
-      border: 1px solid #30363d;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-    button {
-      width: 100%;
-      margin-top: 15px;
-      background-color: #238636;
-      color: #fff;
-      border: none;
-      padding: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    button:hover {
-      background-color: #2ea043;
-    }
-    .resultado {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 22px;
-      color: #f0f6fc;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Calculadora EXP</title>
+<style>
+    body { font-family: Arial; background: #f5f5f5; padding: 20px; }
+    .box { background: white; padding: 20px; max-width: 500px; margin: auto; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+    label { font-weight: bold; margin-top: 10px; display: block; }
+    input { width: 100%; padding: 8px; margin-top: 5px; }
+    button { margin-top: 20px; padding: 10px; width: 100%; background: #0077ff; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; }
+    button:hover { background: #005fcc; }
+    #resultado { margin-top: 20px; font-size: 20px; font-weight: bold; }
+</style>
 </head>
 <body>
-  <h1>⚔️ Calculadora EXP Modificado</h1>
-  <div class="container">
 
-    <label>Meta:</label><input id="meta" type="number" value="0" />
+<div class="box">
+<h2>Calculadora de EXP</h2>
 
-    <label>ELP:</label><input id="elp" type="number" value="0" />
+<label>Meta</label>
+<input id="Meta" type="number">
 
-    <label>BP:</label><input id="bp" type="number" value="0" />
+<label>ELP</label>
+<input id="ELP" type="number">
 
-    <label>Nivel:</label><input id="nivel" type="number" value="0" />
+<label>BP</label>
+<input id="BP" type="number">
 
-    <label>Liga:</label><input id="liga" type="number" value="0" />
+<label>Nivel</label>
+<input id="Nivel" type="number">
 
-    <label>Fisura:</label><input id="fisura" type="number" value="0" />
+<label>Liga</label>
+<input id="Liga" type="number">
 
-    <label>Puntos de Batalla Rango:</label><input id="pbRango" type="number" value="0" />
+<label>Fisura</label>
+<input id="Fisura" type="number">
 
-    <label>Modificador de Botín (disminuciones):</label>
-    <input id="modBotin" type="number" value="0" step="0.1" />
+<label>Puntos de Batalla (Rango)</label>
+<input id="PR" type="number">
 
-    <label>Cicatriz de Bot:</label>
-    <input id="cicatriz" type="number" value="0" step="0.1" />
+<label>Modificador de botín de disminuciones</label>
+<input id="Mod" type="number">
 
-    <label>Racha de inicios de sesión:</label>
-    <input id="racha" type="number" value="0" />
+<label>Cicatriz de Bot</label>
+<input id="Cicatriz" type="number">
 
-    <button onclick="calcularEXP()">Calcular EXP Modificado</button>
+<label>Racha de inicios de sesión</label>
+<input id="Racha" type="number">
 
-    <div class="resultado" id="resultado">El resultado aparecerá aquí</div>
-  </div>
+<button onclick="calcular()">Calcular EXP</button>
 
-  <script>
-    function calcularEXP() {
-      // Entradas
-      const meta = parseFloat(document.getElementById('meta').value) || 0;
-      const elp = parseFloat(document.getElementById('elp').value) || 0;
-      const bp = parseFloat(document.getElementById('bp').value) || 0;
-      const nivel = parseFloat(document.getElementById('nivel').value) || 0;
-      const liga = parseFloat(document.getElementById('liga').value) || 0;
-      const fisura = parseFloat(document.getElementById('fisura').value) || 0;
-      const pbRango = parseFloat(document.getElementById('pbRango').value) || 0;
-      const modBotin = parseFloat(document.getElementById('modBotin').value) || 0;
-      const cicatriz = parseFloat(document.getElementById('cicatriz').value) || 0;
-      const racha = parseFloat(document.getElementById('racha').value) || 0;
+<div id="resultado"></div>
+</div>
 
-      // Cálculos ocultos
-      const A = (((meta + elp) / 100000) + (bp / 30)) / 2;
-      const B = (nivel + liga + fisura) + (pbRango / 5);
-      const C = 3 - modBotin;
-      const D = 1 - (0.05 * cicatriz);
-      const E = racha / 10;
+<script>
+function calcular() {
+    // Inputs
+    let Meta = parseFloat(document.getElementById("Meta").value);
+    let ELP = parseFloat(document.getElementById("ELP").value);
+    let BP = parseFloat(document.getElementById("BP").value);
+    let Nivel = parseFloat(document.getElementById("Nivel").value);
+    let Liga = parseFloat(document.getElementById("Liga").value);
+    let Fisura = parseFloat(document.getElementById("Fisura").value);
+    let PR = parseFloat(document.getElementById("PR").value);
+    let Mod = parseFloat(document.getElementById("Mod").value);
+    let Cicatriz = parseFloat(document.getElementById("Cicatriz").value);
+    let Racha = parseFloat(document.getElementById("Racha").value);
 
-      // A final (tu fórmula base)
-      const Afinal = A * B * C * D * E;
+    // Constantes del Excel
+    const CONST_100000 = 100000;
+    const CONST_30 = 30;
 
-      // Fórmula final solicitada
-      const EXP = (((Afinal * 2) - (bp / 30)) * 100000) - elp;
+    // Variables ocultas (del Excel)
+    let B = (Nivel + Liga + Fisura) + (PR / 5);
+    let C = 3 - Mod;
+    let D = 1 - (0.05 * Cicatriz);
+    let E = Racha / 10;
 
-      document.getElementById('resultado').textContent =
-        "EXP necesario: " + Math.round(EXP).toLocaleString();
-    }
-  </script>
+    let A = Meta / (B * C * D * E);
+
+    // Fórmula final
+    let EXP = (((A * 2) - (BP / CONST_30)) * CONST_100000) - ELP;
+
+    document.getElementById("resultado").innerHTML =
+        "EXP Total: " + EXP.toLocaleString("es-ES");
+}
+</script>
+
 </body>
 </html>
