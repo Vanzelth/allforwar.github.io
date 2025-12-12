@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Menú principal</title>
+<style>
+    body { font-family: Arial; background: #f3f3f3; padding: 20px; }
+    .menu { max-width: 400px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 0 10px #ccc; }
+    a { display: block; padding: 15px; margin-top: 10px; background: #0078ff; color: white; text-align: center; text-decoration: none; border-radius: 8px; }
+    a:hover { background: #005fcc; }
+</style>
+</head>
+<body>
+
+<div class="menu">
+    <h2>Selecciona una Calculadora</h2>
+
+    <a href="rango.html">Calculadora de Rango</a>
+    <a href="exp.html">Calculadora de Experiencia</a>
+    <a href="pel.html">Calculadora de Puntos Elites</a>
+</div>
+
+</body>
+</html>
