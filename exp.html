@@ -1,56 +1,100 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Calculadora EXP</title>
-<style>
-    body { font-family: Arial; background: #f5f5f5; padding: 20px; }
-    .box { background: white; padding: 20px; max-width: 500px; margin: auto; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
-    label { font-weight: bold; margin-top: 10px; display: block; }
-    input { width: 100%; padding: 8px; margin-top: 5px; }
-    button { margin-top: 20px; padding: 10px; width: 100%; background: #0077ff; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; }
-    button:hover { background: #005fcc; }
-    #resultado { margin-top: 20px; font-size: 20px; font-weight: bold; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de EXP</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #c9d1d9;
+      font-family: Consolas, monospace;
+      padding: 20px;
+    }
+    h1 {
+      color: #58a6ff;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #161b22;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input {
+      width: 100%;
+      padding: 6px;
+      background: #0d1117;
+      color: #fff;
+      border: 1px solid #30363d;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      margin-top: 15px;
+      background-color: #238636;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #2ea043;
+    }
+    .resultado {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 22px;
+      color: #f0f6fc;
+    }
+  </style>
 </head>
 <body>
 
-<div class="box">
-<h2>Calculadora de EXP</h2>
+<h2>⚔️ Calculadora de EXP ⚔️</h2>
 
-<label>Meta</label>
-<input id="Meta" type="number">
+<label>Puntos de Rango</label>
+<input id="Meta" type="number" value="0" />
 
 <label>ELP</label>
-<input id="ELP" type="number">
+<input id="ELP" type="number" value="0" />
 
 <label>BP</label>
-<input id="BP" type="number">
+<input id="BP" type="number" value="0" />
 
 <label>Nivel</label>
-<input id="Nivel" type="number">
+<input id="Nivel" type="number" value="0" />
 
 <label>Liga</label>
-<input id="Liga" type="number">
+<input id="Liga" type="number" value="0" />
 
 <label>Fisura</label>
-<input id="Fisura" type="number">
+<input id="Fisura" type="number" value="0" />
 
-<label>Puntos de Batalla (Rango)</label>
-<input id="PR" type="number">
+<label>Rango Puntos de Batalla</label>
+<input id="PR" type="number" value="0" />
 
-<label>Modificador de botín de disminuciones</label>
-<input id="Mod" type="number">
+<label>Modificador de botín de Disminución</label>
+<input id="Mod" type="number" value="0" />
 
 <label>Cicatriz de Bot</label>
-<input id="Cicatriz" type="number">
+<input id="Cicatriz" type="number" value="0" />
 
-<label>Racha de inicios de sesión</label>
-<input id="Racha" type="number">
+<label>Racha Inicios de Sesión</label>
+<input id="Racha" type="number" value="0" />
 
-<button onclick="calcular()">Calcular EXP</button>
+<button onclick="calcular()">Calcular Puntos de Experiencia</button>
 
-<div id="resultado"></div>
+<div id="resultado">Tus Puntos de Experiencia aparecerán aquí</div>
 </div>
 
 <script>
